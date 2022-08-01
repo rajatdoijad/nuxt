@@ -1,3 +1,5 @@
+
+
 <template>
     <div class=" flex md:container md:mx-auto">
         <div class="w-2/3 bg-teal-600">
