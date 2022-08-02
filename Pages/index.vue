@@ -1,15 +1,13 @@
-
-
 <template>
     <div class=" flex md:container md:mx-auto">
-        <div class="w-2/3 bg-teal-600">
-            <h1 class="text-red-600 font-bold text-2xl text-center"> Display User Data </h1>
+        <div class="md:w-2/3 bg-teal-600">
+            <h3 class="text-red-600 flex justify-center font-bold text-2xl  text-center "> Display User Information </h3>
 
-            <input type="text"  @keyup="userFindByName(userName)" v-model="userName" id="userName" name="userName" placeholder="Find by Name" class="rounded-xl p-1 m-1">
+            <!-- <input type="text"  @keyup="userFindByName(userName)" v-model="userName" id="userName" name="userName" placeholder="Find by Name" class="rounded-xl p-1 m-1">
             <input type="text" @keyup="userFindByEmail(userEmail)" v-model="userEmail" id="userEmail" name="userEmail" placeholder="Find by Email" class="rounded-xl p-1 m-1">
-            <input type="number" @keyup="userFindByMobile(userMob)" v-model="userMob" id="userMob" name="userMob" placeholder="Find by Mob" class="rounded-xl p-1 m-1">
-            <input type="text" @keyup="userFindByAddress(userAddress)" v-model="userAddress" id="userName" name="userAddress" placeholder="Find by Address" class="rounded-xl p-1 m-1">
-            <table  class="w-full border-1 m-3 border-stone-800">
+            <input type="number" @keyup="userFindByMobile(userMob)" v-model="userMob" id="userMob" name="userMob" placeholder="Find by Mob" class="rounded-xl p-1 m-1"> -->
+            <input type="text" @keyup="userFindByAddress(userAddress)" v-model="userAddress" id="userName" name="userAddress" placeholder="Search for Anything" class="rounded-xl px-5 p-1 m-1">
+            <table  class="w-11/12 border-1 m-3 border-stone-800">
                 <!-- v-show="allUserData.length>=1" -->
                 <tr class="border border-1 border-stone-800">
                     <th class="border border-1 border-stone-800">Name</th>
@@ -25,8 +23,8 @@
                     <td class="border border-1 border-stone-800">{{user.email}}</td>
                     <td class="border border-1 border-stone-800">{{user.mobile}}</td>
                     <td class="border border-1 border-stone-800">{{user.address}}</td>
-                    <td class="border border-1 border-stone-800"><button @click="onEdit(i)" class="bg-black hover:bg-gray-800 p-1 px-2 rounded-lg text-white" id="edit" type="button">Edit</button></td>
-                    <td class="border border-1 border-stone-800"><button @click="deleteUser(i)" class="bg-black hover:bg-red-800 p-1 px-2 rounded-lg text-white" id="delete" type="button">Delete</button></td>
+                    <td class="border border-1 border-stone-800"><button @click="onEdit(i)" class="bg-black hover:bg-blue-600 p-1 px-2 rounded-lg text-white" id="edit" type="button">Edit</button></td>
+                    <td class="border border-1 border-stone-800"><button @click="deleteUser(i)" class="bg-black hover:bg-red-900 p-1 px-2 rounded-lg text-white" id="delete" type="button">Delete</button></td>
                 </tr>
             </table>
             <!-- <div class="bg-blue-300 md:container w-1/3" > Hello div 2 -->
@@ -36,17 +34,17 @@
         <!-- <h1>Heelo2</h1> -->
         <!-- </div> -->
 
-        <div class="bg-blue-300 w-1/3" >
-            <h1 id="formName" class="text-blue text-3xl item-center font-bold flex justify-center">Add User</h1>
+        <div class="bg-red-100  sm:w-1/3" >
+            <h6 id="formName" class="text-blue sm:text-3xl item-center flex justify-center font-bold sm:ml-8">Add User Info</h6>
             <form method="post">
-                <table class="justify-between item-center">
+                <table class="ml-5 m-2 sm:item-center">
                     <!-- Name -->
                     <tr>
                         <td>
                             <label for="name">Name</label>
                         </td>
                         <td>
-                            <input type="text" v-model="userData.name" name="name" id="name" placeholder="Name" class="rounded-xl p-1" required>
+                            <input type="text" @change="validationName" v-model="userData.name" name="name" id="name" placeholder="Name" class="sm:rounded-xl sm:p-1" required>
                         </td>
                     </tr>
 
@@ -56,7 +54,7 @@
                             <label for="email">Email</label>
                         </td>
                         <td>
-                            <input type="email" v-model="userData.email" name="email" id="email" placeholder="Email" class="rounded-xl p-1" required>
+                            <input type="email" @change=" validationEmail" v-model="userData.email" name="email" id="email" placeholder="Email" class="sm:rounded-xl sm:p-1" required>
                         </td>
                     </tr>
 
@@ -66,7 +64,7 @@
                             <label for="mobile">Mobile</label>
                         </td>
                         <td>
-                            <input type="number" v-model="userData.mobile" name="mobile" id="moile" placeholder=" Mobile Number" class="rounded-xl p-1" required>
+                            <input type="number" @change=" validationMobile" v-model="userData.mobile" name="mobile" id="moile" placeholder=" Mobile No." class="sm:rounded-xl mr-5 sm:p-1" required>
                         </td>
                     </tr>
 
@@ -76,16 +74,16 @@
                             <label for="address">Address</label>
                         </td>
                         <td>
-                            <textarea name="address" v-model="userData.address" id="address" placeholder="Address" class="rounded-xl p-1"  rows="3" required></textarea>
+                            <textarea name="address" @change=" validationAddress" v-model="userData.address" id="address" placeholder="Address" class="sm:rounded-xl sm:p-1 "  rows="3" required></textarea>
                         </td>
                     </tr>
                     <!-- Buttons -->
                     <tr>
                         <td>
-                            <button @click="submitUserForm" class="bg-black hover:bg-gray-800 p-1 px-2 rounded-lg text-white" id="submit" type="submit">Submit</button>
+                            <button @click="submitUserForm" class="bg-blue-800  p-1 px-2 rounded-lg text-white" id="submit" type="submit">Submit</button>
                         </td>
                         <td>
-                            <button @click="resetForm" class="bg-black hover:bg-gray-800 p-1 px-2 rounded-lg text-white" id="reset" type="reset">Reset</button>
+                            <button @click="resetForm" class="bg-blue-800  p-1 px-2 rounded-lg text-white" id="reset" type="reset">Reset</button>
                         </td>
                     </tr>
 
@@ -94,7 +92,7 @@
 
         </div>
     </div>
-    <hr class=" mt-4 border-4 border-orange-600">
+    <hr class=" mt-4 border-2 border-black">
     <div>
         <table  class="w-full border-1 m-3 border-stone-800">
                 <!-- v-show="allUserData.length>=1" -->
@@ -122,27 +120,33 @@
 <script>
 export default {
     data(){
-        
         return{
             isEdit: false,
             indexEdit : -1,
             userName: '',
-            userEmail: '',  
+            userEmail: '',
             userMob: '',
             userAddress: '',
             userFound: [],
             uniqueEmail:[],
+            address1: '',
+            address2: '',
+            name1:'',
+            name2:'',
+            email1:'',
+            email2:'',
+            mobile1:'',
+            mobile2:'',
+            emailMatch: '/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/',
             // index: index + 1,
             allUserData : [],
             // i : 0,
             // show : false,
             userData : {
-                
                 name : '',
                 email : '',
                 mobile : '',
                 address : '',
-                
             },
         }
     },
@@ -150,24 +154,61 @@ export default {
         submitUserForm(event){
             event.preventDefault(event);
             console.log(this.userData);
-            
+            //  //  // Validation for Name
+            // // if(this.userData.name==''){
+            // if( !isNaN(this.userData.name) || this.userData.name==null || this.userData.name==""){
+            //         alert("Please Enter Name");
+            //         // console.log("Please Enter Name");
+            //         this.resetForm();
+            // }else{
+            //     console.log(this.userData.name);
+            //         // alert("Name is valid");
+            // }
+            // // Validation for Email
+            //         // if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.userData.email)){
+            //     this.emailMatch = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            //     // if(this.userData.email.matchAll(this.emailMatch)){
+            //     if(this.emailMatch.test(this.userData.email)){
+            //         // alert("Email is valid");
+            //         // console.log("Email is valid");
+            //     }else{
+            //         alert("Email is Invalid");
+            //         this.resetForm();
+            //     }
+            // // Validation for Mobile
+            // // If x is Not a Number or less than 10 digit or greater than 9999999999
+            // if (isNaN(this.userData.mobile) || this.userData.mobile < 1000000000 || this.userData.mobile > 9999999999) {
+            //     alert("Mobile Number is Invalid");
+            //     this.resetForm();
+            // } else {
+            //     // alert("Mobile Number is valid");
+            // }
+            // //   // Validation for Address
+            // // if(this.userData.address!=''){
+            //     if(this.userData.address==null || this.userData.address==""){
+            //         alert("Please Enter Address");
+            //         // console.log("Please Enter Address");
+            //         this.resetForm();
+            // }else{
+            //         // alert("Address is valid");
+            // }
             // Check Email id is unique or not
             this.uniqueEmail = this.allUserData.filter((e) => {
                 if(e.email != this.userData.email){
-                
                     console.log(e);
-                    
                 }else{
-                    alert("Email Already Registered");
-                    this.resetForm();
+                    if(this.isEdit===true){
+                        this.allUserData[this.indexEdit]=this.userData;
+                    }else{
+                        alert("Email Already Registered");
+                        this.resetForm();
+                    }
                 }
             });
-            
                 if(this.isEdit===true){
                     this.allUserData[this.indexEdit]=this.userData;
                     this.isEdit=false;
                     this.indexEdit = -1;
-               
                 }
                 else{
                     // alert("unable to update");
@@ -177,7 +218,6 @@ export default {
                         this.allUserData.push(this.userData);
                     }
                 }
-           
             this.userData = { name:'', email:'',mobile:'',  address:'', };
             console.log(" User Form Values", this.allUserData);
             const formHead = document.getElementById('formName');
@@ -193,14 +233,12 @@ export default {
             this.userData.email = this.allUserData[index].email;
             this.userData.mobile = this.allUserData[index].mobile;
             this.userData.address = this.allUserData[index].address;
-            
             const formHead = document.getElementById('formName');
             formHead.innerText = 'Edit User';
             const myButton = document.getElementById('submit');
             myButton.innerText = 'Update';
             this.isEdit=true;
             this.indexEdit = index;
-            
         },
         // Delete user from array
         deleteUser(index){
@@ -210,7 +248,7 @@ export default {
             formHead.innerText = 'Add User';
             const myButton = document.getElementById('submit');
             myButton.innerText = 'Submit';
-        },  
+        },
         // reset form values
         resetForm() {
             console.log("reset call");
@@ -222,60 +260,119 @@ export default {
             this.isEdit=false;
             this.userData = { name:'',  email:'',mobile:'', address:'',};
         },
-        // Find user by Name in array
-        userFindByName(userName){         
-            console.log(userName);
-            this.userFound = this.allUserData.filter((e) => {
-                // if(e.name == userName)
-                if(e.name.startsWith(userName)){
-                    console.log(e);
-                    // if(e.name.startsWith(userName))
-                    return e;
-                    // alert("user Found" + e.firstName+ ""+e.lastName);
-                }
-            }); 
-            console.log(this.userFound);           
-        },
-        // Find user by Email in array
-        userFindByEmail(userEmail){         
-            console.log(userEmail);
-            this.userFound = this.allUserData.filter((e) => {
-                // if(e.email == userEmail)
-                if(e.email.startsWith(userEmail)){
-                    console.log(e);
-                    return e;
-                    // alert("user Found" + e.firstName+ ""+e.lastName);
-                }
-            }); 
-            console.log(this.userFound);           
-        },
-        // Find user by Mobile in array
-        userFindByMobile(userMob){         
-            console.log(userMob);
-            this.userFound = this.allUserData.filter((e) => {
-                if(e.mobile == userMob){
-                // if(e.mobile.startsWith(userMob)){
-                    console.log(e);
-                    return e;
-                    // alert("user Found" + e.firstName+ ""+e.lastName);
-                }
-            }); 
-            console.log(this.userFound);           
-        },
-        
+        // // Find user by Name in array
+        // userFindByName(userName){
+        //     console.log(userName);
+        //     this.userFound = this.allUserData.filter((e) => {
+        //         // if(e.name == userName)
+        //         if(e.name.startsWith(userName)){
+        //             console.log(e);
+        //             // if(e.name.startsWith(userName))
+        //             return e;
+        //         }
+        //     });
+        //     console.log(this.userFound);
+        // },
+        // // Find user by Email in array
+        // userFindByEmail(userEmail){
+        //     console.log(userEmail);
+        //     this.userFound = this.allUserData.filter((e) => {
+        //         // if(e.email == userEmail)
+        //         if(e.email.startsWith(userEmail)){
+        //             console.log(e);
+        //             return e;
+        //             // alert("user Found" + e.firstName+ ""+e.lastName);
+        //         }
+        //     });
+        //     console.log(this.userFound);
+        // },
+        // // Find user by Mobile in array
+        // userFindByMobile(userMob){
+        //     console.log(userMob);
+        //     this.userFound = this.allUserData.filter((e) => {
+        //         if(e.mobile == userMob){
+        //         // if(e.mobile.startsWith(userMob)){
+        //             console.log(e);
+        //             return e;
+        //             // alert("user Found" + e.firstName+ ""+e.lastName);
+        //         }
+        //     });
+        //     console.log(this.userFound);
+        // },
         // Find user by Address in array
-        userFindByAddress(userAddress){         
+        userFindByAddress(userAddress){
             console.log(userAddress);
             this.userFound = this.allUserData.filter((e) => {
                 // if(e.address == userAddress)
-                if(e.address.startsWith(userAddress)){
+                this.address1 = userAddress.toLocaleLowerCase();
+                console.log(this.address1);
+                this.address2 = e.address.toLocaleLowerCase();
+                this.name1 = userAddress.toLocaleLowerCase();
+                this.name2 = e.name.toLocaleLowerCase();
+                this.email1 = userAddress.toLocaleLowerCase();
+                this.email2 = e.email.toLocaleLowerCase();
+                this.mobile1 = userAddress.toString();
+                this.mobile2 = e.mobile.toString();
+                if(this.address2.startsWith(this.address1) || this.name2.startsWith(this.name1) || this.email2.startsWith(this.email1) || this.mobile2.startsWith(this.mobile1)  ){
+                    // toLocaleLowerCase
                     console.log(e);
                     return e;
                     // alert("user Found" + e.firstName+ ""+e.lastName);
                 }
-            }); 
-            console.log(this.userFound);           
+            });
+            console.log(this.userFound);
+        },
+        //  // Validation for Name
+        validationName(){
+             //  // Validation for Name
+            // if(this.userData.name==''){
+            if( !isNaN(this.userData.name) || this.userData.name==null || this.userData.name==""){
+                    alert("Please Enter Name");
+                    // console.log("Please Enter Name");
+                    this.resetForm();
+            }else{
+                console.log(this.userData.name);
+                    // alert("Name is valid");
+            }
+        },
+        // Validation for Email
+        validationEmail(){
+                    // if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.userData.email)){
+                this.emailMatch = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                // if(this.userData.email.matchAll(this.emailMatch)){
+                if(this.emailMatch.test(this.userData.email)){
+                    // alert("Email is valid");
+                    // console.log("Email is valid");
+                }else{
+                    alert("Email is Invalid");
+                    this.resetForm();
+                }
+        },
+        // Validation for Mobile
+        validationMobile(){
+            // Validation for Mobile
+            // If x is Not a Number or less than 10 digit or greater than 9999999999
+            if (isNaN(this.userData.mobile) || this.userData.mobile < 1000000000 || this.userData.mobile > 9999999999) {
+                alert("Mobile Number is Invalid");
+                this.resetForm();
+            } else {
+                // alert("Mobile Number is valid");
+            }
+        },
+        //   // Validation for Address
+        validationAddress(){
+            //   // Validation for Address
+            // if(this.userData.address!=''){
+                if(this.userData.address==null || this.userData.address=="" ){
+                    // this.userData.address2.length<6
+                    alert("Please Enter Address");
+                    // console.log("Please Enter Address");
+                    this.resetForm();
+            }else{
+                    // alert("Address is valid");
+            }
         },
     }
 }
+
 </script>
